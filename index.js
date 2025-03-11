@@ -25,7 +25,18 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (data) => {
     console.log("Disconnected user");
   });
+
+  /**
+   * runs when the client requests to start the server
+   * @param data the name of the server we wish to start
+   */
+  socket.on("pos", (data) => {
+    // update all clients of the change
+    socket.broadcast.emit("pos", data);
+    // socket.emit("pos", data);
+  });
 });
 
 // startup
+console.log(`Started on port ${PORT}`);
 server.listen(PORT);
