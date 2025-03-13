@@ -24,10 +24,10 @@ function setup() {
     wire_width = width;
     wire_height = (height / 2) * 0.08;
     // set PS2 to be on the bottom of the screen
-    controller = new PS2(width / 2, height * .75, width, height / 2);
+    controller = new PS2(width / 2, height * 0.75, width, height / 2);
   } else {
     // set PS2 to be on the right side of the screen otherwise
-    controller = new PS2(width * .75, height / 2, width / 2, height);
+    controller = new PS2(width * 0.75, height / 2, width / 2, height);
   }
 
   // set alert pin
@@ -127,10 +127,14 @@ function draw() {
 // temp for sending clock start
 function mouseClicked() {
   WIRES[8].initiate_transfer();
+  WIRES[8].byte = 0;
   WIRES[7].initiate_transfer();
+  WIRES[7].byte = 0;
 }
 
 function touchStarted() {
   WIRES[8].initiate_transfer();
+  WIRES[8].byte = 0;
   WIRES[7].initiate_transfer();
+  WIRES[7].byte = 0;
 }
