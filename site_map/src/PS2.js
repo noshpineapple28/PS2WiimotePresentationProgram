@@ -56,71 +56,177 @@ class PS2 {
     angleMode(DEGREES);
 
     // buttons
+    this.buttons = [];
+    this.create_buttons();
+    // analog sticks
+    this.left_stick = new AnalogStick(
+      this.posX - this.width * 0.12198795180722892,
+      this.posY + this.width * 0.07605421686746988,
+      this.width * 0.11,
+      MEDIA["analog"]
+    );
+    this.right_stick = new AnalogStick(
+      this.posX + this.width * 0.11,
+      this.posY + this.width * 0.07605421686746988,
+      this.width * 0.11,
+      MEDIA["analog"]
+    );
+  }
+
+  create_buttons() {
     this.buttons = [
       new Button(
         this.posX + this.width * 0.23343373493975902,
         this.posY + this.width * 0.021837349397590362,
         this.width * 0.05,
         this.width * 0.05,
-        MEDIA["x"]
+        MEDIA["x"],
+        BM2_X_MASK,
+        4
       ),
       new Button(
-        this.posX + this.width * 0.30271084337349397   ,
+        this.posX + this.width * 0.30271084337349397,
         this.posY - this.width * 0.038403614457831324,
         this.width * 0.05,
         this.width * 0.05,
-        MEDIA["circle"]
+        MEDIA["circle"],
+        BM2_O_MASK,
+        4
       ),
       new Button(
-        this.posX + this.width * 0.16735966735966737    ,
+        this.posX + this.width * 0.16735966735966737,
         this.posY - this.width * 0.04261954261954262,
         this.width * 0.05,
         this.width * 0.05,
-        MEDIA["square"]
+        MEDIA["square"],
+        BM2_SQUARE_MASK,
+        4
       ),
       new Button(
-        this.posX + this.width * 0.2338877338877339    ,
+        this.posX + this.width * 0.2338877338877339,
         this.posY - this.width * 0.09875259875259876,
         this.width * 0.05,
         this.width * 0.05,
-        MEDIA["triangle"]
+        MEDIA["triangle"],
+        BM2_TRIANGLE_MASK,
+        4
       ),
       // up
       new Button(
-        this.posX - this.width * 0.240625     ,
+        this.posX - this.width * 0.240625,
         this.posY - this.width * 0.0828125,
         this.width * 0.04,
         this.width * 0.05,
-        MEDIA["dpad"]
+        MEDIA["dpad"],
+        BM1_UP_MASK,
+        3
       ),
       // right
       new Button(
-        this.posX - this.width * 0.2     ,
+        this.posX - this.width * 0.2,
         this.posY - this.width * 0.0421875,
         this.width * 0.04,
         this.width * 0.05,
         MEDIA["dpad"],
+        BM1_RIGHT_MASK,
+        3,
         90
       ),
       // down
       new Button(
-        this.posX - this.width * 0.240625     ,
+        this.posX - this.width * 0.240625,
         this.posY - this.width * 0.0005208333333333333,
         this.width * 0.04,
         this.width * 0.05,
         MEDIA["dpad"],
+        BM1_DOWN_MASK,
+        3,
         180
       ),
       // left
       new Button(
-        this.posX - this.width * 0.28125      ,
+        this.posX - this.width * 0.28125,
         this.posY - this.width * 0.0453125,
         this.width * 0.04,
         this.width * 0.05,
         MEDIA["dpad"],
+        BM1_LEFT_MASK,
+        3,
         -90
       ),
-    ]
+      // select
+      new Button(
+        this.posX - this.width * 0.07530120481927711,
+        this.posY - this.width * 0.038403614457831324,
+        this.width * 0.04,
+        this.width * 0.025,
+        MEDIA["select"],
+        BM1_SELECT_MASK,
+        3
+      ),
+      // analog
+      new AnalogButton(
+        this.posX,
+        this.posY + this.width * 0.029367469879518073,
+        this.width * 0.05,
+        this.width * 0.025,
+        MEDIA["select"]
+      ),
+      // start
+      new Button(
+        this.posX + this.width * 0.07,
+        this.posY - this.width * 0.038403614457831324,
+        this.width * 0.04,
+        this.width * 0.025,
+        MEDIA["start"],
+        BM1_START_MASK,
+        3
+      ),
+      // L1
+      new Button(
+        this.posX - this.width * 0.23795180722891565,
+        this.posY - this.width * 0.2628012048192771,
+        this.width * 0.1,
+        this.width * 0.04,
+        MEDIA["1trigger"],
+        BM2_L1_MASK,
+        4
+      ),
+      // R1
+      new Button(
+        this.posX + this.width * 0.23795180722891565,
+        this.posY - this.width * 0.2628012048192771,
+        this.width * 0.1,
+        this.width * 0.04,
+        MEDIA["1trigger"],
+        BM2_R1_MASK,
+        4,
+        0,
+        true
+      ),
+      // L2
+      new Button(
+        this.posX - this.width * 0.23795180722891565,
+        this.posY - this.width * 0.32756024096385544,
+        this.width * 0.1,
+        this.width * 0.06,
+        MEDIA["2trigger"],
+        BM2_L2_MASK,
+        4
+      ),
+      // R2
+      new Button(
+        this.posX + this.width * 0.23795180722891565,
+        this.posY - this.width * 0.32756024096385544,
+        this.width * 0.1,
+        this.width * 0.06,
+        MEDIA["2trigger"],
+        BM2_R2_MASK,
+        4,
+        0,
+        true
+      ),
+    ];
   }
 
   /**
@@ -173,8 +279,9 @@ class PS2 {
       this.width * 0.6
     );
 
-    for (let button of this.buttons)
-      button.display();
+    for (let button of this.buttons) button.display();
+    this.left_stick.display();
+    this.right_stick.display();
   }
 
   /**

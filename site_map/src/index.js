@@ -142,7 +142,7 @@ function draw() {
 // handle the button updates
 function handleButtonPresses() {
   for (let button of controller.buttons) {
-    if (button.is_inside()) button.pressed = !button.pressed;
+    if (button.is_inside()) button.toggle();
   }
 }
 
@@ -153,11 +153,6 @@ function mouseClicked() {
   WIRES[7].initiate_transfer();
   WIRES[7].byte = 0;
   if (mouseIsPressed) handleButtonPresses();
-
-  console.log(
-    abs(mouseX - controller.posX) / controller.width,
-    abs(mouseY - controller.posY) / controller.width
-  );
 }
 
 function touchStarted() {

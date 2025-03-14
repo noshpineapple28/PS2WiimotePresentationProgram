@@ -10,18 +10,43 @@ class Button {
    * @param {int} width
    * @param {int} height
    * @param {p5.image} image image of the button
+   * @param {int} button_mask the mask for the button press
+   * @param {int} MISO_index the index in the MISO buffer that this element belongs to
    * @param {int} rot degrees to rotate an image
+   * @param {boolean} flip determines if the image of the button should be flipped horizontally
    */
-  constructor(posX, posY, width, height, image, rot_deg = 0) {
+  constructor(
+    posX,
+    posY,
+    width,
+    height,
+    image,
+    button_mask,
+    MISO_index,
+    rot_deg = 0,
+    flip = false
+  ) {
     this.posX = posX;
     this.posY = posY;
     this.width = width;
     this.height = height;
     this.image = image;
+    this.button_mask = button_mask;
+    this.MISO_index = MISO_index;
     this.rot_deg = rot_deg;
+    this.flip = flip;
 
     // button press state
     this.pressed = false;
+  }
+
+  toggle() {
+    this.pressed = !this.pressed;
+
+    // update MISO line buffer
+    if (this.pressed)
+      WIRES[8].data_buffer[this.MISO_index] &= ~this.button_mask;
+    else WIRES[8].data_buffer[this.MISO_index] |= this.button_mask;
   }
 
   /**
@@ -50,6 +75,12 @@ class Button {
       push();
       translate(this.posX, this.posY);
       rotate(this.rot_deg);
+      image(this.image, 0, 0, this.width, this.height);
+      pop();
+    } else if (this.flip) {
+      push();
+      translate(this.posX, this.posY);
+      scale(-1, 1);
       image(this.image, 0, 0, this.width, this.height);
       pop();
     } else {
