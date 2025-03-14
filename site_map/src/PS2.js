@@ -253,21 +253,20 @@ class PS2 {
     }
     ellipse(this.knob_x, this.knob_y, this.width * 0.025, this.width * 0.025);
     // set hertz
-    hz = map(
-      this.knob_x,
-      this.posX - this.width * 0.1,
-      this.posX + this.width * 0.1,
-      0.25,
-      5
+    hz = round(
+      map(
+        this.knob_x,
+        this.posX - this.width * 0.1,
+        this.posX + this.width * 0.1,
+        0.25,
+        5
+      ),
+      2
     );
 
     // display hz
     noStroke();
-    text(
-      `Displaying at ${round(hz, 2)} Hz`,
-      this.posX,
-      this.knob_y + this.height * 0.05
-    );
+    text(`Displaying at ${hz} Hz`, this.posX, this.knob_y + this.height * 0.05);
   }
 
   controller() {
