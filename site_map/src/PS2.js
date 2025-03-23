@@ -365,8 +365,8 @@ class PS2 {
     return (
       mouseX >= this.posX - this.width * 0.1 &&
       mouseX <= this.posX + this.width * 0.1 &&
-      mouseY >= this.posY + this.height * 0.25 - this.width * 0.05 &&
-      mouseY <= this.posY + this.height * 0.25 + this.width * 0.05
+      mouseY >= this.posY + this.height * 0.35 - this.width * 0.05 &&
+      mouseY <= this.posY + this.height * 0.35 + this.width * 0.05
     );
   }
 
@@ -391,14 +391,14 @@ class PS2 {
     fill(fill_color);
     rect(
       this.posX,
-      this.posY + this.height * 0.25,
+      this.posY + this.height * 0.35,
       this.width * 0.2,
       this.width * 0.1,
       10
     );
     // textAlign(CENTER);
     fill(0);
-    text(phrase, this.posX, this.posY + this.height * 0.25);
+    text(phrase, this.posX, this.posY + this.height * 0.35);
     pop();
   }
 

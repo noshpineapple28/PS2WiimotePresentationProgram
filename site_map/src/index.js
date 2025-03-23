@@ -26,7 +26,7 @@ function setup() {
   // set frame rate
   frameRate(60);
 
-  scene = new PS2ControllerLinesScene();
+  scene = new SPIDemo();
 }
 
 function draw() {
