@@ -41,9 +41,9 @@ class Alert extends Wire {
     super.update();
 
     // if we are set to stop transferring, end the line on the LATTER half
-    //      the hz signal
+    //      the scene.hz signal
     if (
-      (frameCount - this.start_frame_remainder) % (60 / hz) < 60 / hz / 2 &&
+      (frameCount - this.start_frame_remainder) % (60 / scene.hz) < 60 / scene.hz / 2 &&
       !this.transfering &&
       this.edge == "FALLING"
     ) {

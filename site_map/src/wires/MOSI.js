@@ -33,8 +33,8 @@ class MOSI extends Wire {
    */
   initiate_transfer() {
     // send a clock signal
-    if (!transaction_in_progress) {
-      transaction_in_progress = true;
+    if (!scene.transaction_in_progress) {
+      scene.transaction_in_progress = true;
       this.clock.initiate_transfer();
       this.byte = 0;
     }

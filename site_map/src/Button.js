@@ -45,8 +45,8 @@ class Button {
 
     // update MISO line buffer
     if (this.pressed)
-      WIRES[8].data_buffer[this.MISO_index] &= ~this.button_mask;
-    else WIRES[8].data_buffer[this.MISO_index] |= this.button_mask;
+      scene.miso.data_buffer[this.MISO_index] &= ~this.button_mask;
+    else scene.miso.data_buffer[this.MISO_index] |= this.button_mask;
   }
 
   /**

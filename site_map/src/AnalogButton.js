@@ -9,42 +9,42 @@ class AnalogButton extends Button {
     // update MISO line buffer to include or exclude analog sticks
     if (this.pressed) {
       let perc_l_x = round(
-        (abs(controller.left_stick.deltaX - controller.left_stick.posX) /
-          controller.left_stick.width) *
+        (abs(scene.controller.left_stick.deltaX - scene.controller.left_stick.posX) /
+          scene.controller.left_stick.width) *
           0xff
       );
       let perc_l_y = round(
-        (abs(controller.left_stick.deltaY - controller.left_stick.posY) /
-          controller.left_stick.width) *
+        (abs(scene.controller.left_stick.deltaY - scene.controller.left_stick.posY) /
+          scene.controller.left_stick.width) *
           0xff
       );
       let perc_r_x = round(
-        (abs(controller.right_stick.deltaX - controller.right_stick.posX) /
-          controller.right_stick.width) *
+        (abs(scene.controller.right_stick.deltaX - scene.controller.right_stick.posX) /
+          scene.controller.right_stick.width) *
           0xff
       );
       let perc_r_y = round(
-        (abs(controller.right_stick.deltaY - controller.right_stick.posY) /
-          controller.right_stick.width) *
+        (abs(scene.controller.right_stick.deltaY - scene.controller.right_stick.posY) /
+          scene.controller.right_stick.width) *
           0xff
       );
 
-      WIRES[8].data_buffer[1] = 0x72;
-      WIRES[8].data_buffer.push(perc_r_x);
-      WIRES[8].data_buffer.push(perc_r_y);
-      WIRES[8].data_buffer.push(perc_l_x);
-      WIRES[8].data_buffer.push(perc_l_y);
+      scene.miso.data_buffer[1] = 0x72;
+      scene.miso.data_buffer.push(perc_r_x);
+      scene.miso.data_buffer.push(perc_r_y);
+      scene.miso.data_buffer.push(perc_l_x);
+      scene.miso.data_buffer.push(perc_l_y);
     } else {
-      WIRES[8].data_buffer[1] = 0x42;
-      WIRES[8].data_buffer.pop();
-      WIRES[8].data_buffer.pop();
-      WIRES[8].data_buffer.pop();
-      WIRES[8].data_buffer.pop();
+      scene.miso.data_buffer[1] = 0x42;
+      scene.miso.data_buffer.pop();
+      scene.miso.data_buffer.pop();
+      scene.miso.data_buffer.pop();
+      scene.miso.data_buffer.pop();
     }
   }
 
   /**
-   * detects if a mouse is inside the controller
+   * detects if a mouse is inside the scene.controller
    * @returns true if the mouse is inside the button, false if not
    */
   is_inside() {

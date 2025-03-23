@@ -41,15 +41,15 @@ class Ack extends Wire {
 
     // add new point if swapping positions
     if (
-      (frameCount - this.start_frame_remainder) % (60 / hz / 4) >=
-        60 / hz / 4 / 2 &&
+      (frameCount - this.start_frame_remainder) % (60 / scene.hz / 4) >=
+        60 / scene.hz / 4 / 2 &&
       this.edge != "FALLING"
     ) {
       this.points.push([this.posX, this.posY + this.height]);
       this.edge = "FALLING";
     } else if (
-      (frameCount - this.start_frame_remainder) % (60 / hz / 4) <
-        60 / hz / 4 / 2 &&
+      (frameCount - this.start_frame_remainder) % (60 / scene.hz / 4) <
+        60 / scene.hz / 4 / 2 &&
       this.edge != "RISING"
     ) {
       this.points.push([this.posX, this.posY]);

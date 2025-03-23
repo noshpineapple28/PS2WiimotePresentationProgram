@@ -31,7 +31,7 @@ class Clock extends Wire {
   initiate_transfer() {
     if (this.bit_count >= 8) {
       this.bit_count = 0;
-      this.start_frame_remainder = frameCount % (60 / hz);
+      this.start_frame_remainder = frameCount % (60 / scene.hz);
       this.alert.alert(this.start_frame_remainder);
     }
   }
@@ -52,7 +52,7 @@ class Clock extends Wire {
 
     // add new point if swapping positions
     if (
-      (frameCount - this.start_frame_remainder) % (60 / hz) >= (60 / hz) / 2 &&
+      (frameCount - this.start_frame_remainder) % (60 / scene.hz) >= (60 / scene.hz) / 2 &&
       this.edge != "RISING"
     ) {
       this.points.push([this.posX, this.posY]);
@@ -61,7 +61,7 @@ class Clock extends Wire {
         this.alert.alert(this.start_frame_remainder);
       }
     } else if (
-      (frameCount - this.start_frame_remainder) % (60 / hz) < (60 / hz) / 2 &&
+      (frameCount - this.start_frame_remainder) % (60 / scene.hz) < (60 / scene.hz) / 2 &&
       this.edge != "FALLING"
     ) {
       this.points.push([this.posX, this.posY + this.height]);

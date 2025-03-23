@@ -73,6 +73,9 @@ class PS2 {
     );
   }
 
+  /**
+   * creates all buttons and places them in the buttons array
+   */
   create_buttons() {
     this.buttons = [
       new Button(
@@ -230,6 +233,40 @@ class PS2 {
   }
 
   /**
+   * called to update the state of the control sticks on the data buffer
+   * @returns None
+   */
+  pressed() {
+    // return early if not in analog mode
+    if (scene.miso.data_buffer[1] != 0x72) return;
+
+    let perc_l_x = round(
+      (abs(this.left_stick.deltaX - this.left_stick.posX) /
+        this.left_stick.width) *
+        0xff
+    );
+    let perc_l_y = round(
+      (abs(this.left_stick.deltaY - this.left_stick.posY) /
+        this.left_stick.width) *
+        0xff
+    );
+    let perc_r_x = round(
+      (abs(this.right_stick.deltaX - this.right_stick.posX) /
+        this.right_stick.width) *
+        0xff
+    );
+    let perc_r_y = round(
+      (abs(this.right_stick.deltaY - this.right_stick.posY) /
+        this.right_stick.width) *
+        0xff
+    );
+    scene.miso.data_buffer[5] = perc_r_x;
+    scene.miso.data_buffer[6] = perc_r_y;
+    scene.miso.data_buffer[7] = perc_l_x;
+    scene.miso.data_buffer[8] = perc_l_y;
+  }
+
+  /**
    * @brief draws the Hz changer slider
    */
   slider() {
@@ -253,7 +290,7 @@ class PS2 {
     }
     ellipse(this.knob_x, this.knob_y, this.width * 0.025, this.width * 0.025);
     // set hertz
-    hz = round(
+    scene.hz = round(
       map(
         this.knob_x,
         this.posX - this.width * 0.1,
@@ -266,7 +303,11 @@ class PS2 {
 
     // display hz
     noStroke();
-    text(`Displaying at ${hz} Hz`, this.posX, this.knob_y + this.height * 0.05);
+    text(
+      `Displaying at ${scene.hz} Hz`,
+      this.posX,
+      this.knob_y + this.height * 0.05
+    );
   }
 
   controller() {
@@ -291,7 +332,6 @@ class PS2 {
     textAlign(CENTER, CENTER);
     noStroke();
     fill(0);
-    text("TEMP, PS2 CONTROLLER\nWILL GO HERE", this.posX, this.posY);
     this.controller();
   }
 }

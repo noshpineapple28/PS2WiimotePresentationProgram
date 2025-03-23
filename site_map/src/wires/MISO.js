@@ -35,8 +35,8 @@ class MISO extends Wire {
    *    progress, will start a new transfer
    */
   initiate_transfer() {
-    if (!transaction_in_progress) {
-      transaction_in_progress = true;
+    if (!scene.transaction_in_progress) {
+      scene.transaction_in_progress = true;
       this.clock.initiate_transfer();
       this.byte = 0;
     }
@@ -63,7 +63,7 @@ class MISO extends Wire {
           this.ack.alert(this.alert.start_frame_remainder);
           this.ack_pinged = true;
         } else {
-          transaction_in_progress = false;
+          scene.transaction_in_progress = false;
         }
       } else if (this.ack_pinged && this.ack.acknowledged) {
         // initiate next data cycle after ping
