@@ -8,6 +8,16 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
 
+/**
+ * scene states:
+ *    PS2ControllerLinesScene
+ *    LinesOnlyScene
+ *    I2CDemo
+ *    SPIDemo
+ *    USARTDemo
+ */
+let SCENE = "LinesOnlyScene";
+
 // whenever the "/" endpoint appears, allow server to serve all files in the site_map folder
 app.use("/", express.static("site_map"));
 
@@ -20,20 +30,26 @@ io.on("connection", (socket) => {
 
   /**
    * runs when the client requests to stop the server
-   * @param data the name of the server we wish to stop
    */
-  socket.on("disconnect", (data) => {
+  socket.on("disconnect", () => {
     console.log("Disconnected user");
   });
 
   /**
-   * runs when the client requests to start the server
-   * @param data the name of the server we wish to start
+   * tells all clients to change the current scene
    */
-  socket.on("pos", (data) => {
-    // update all clients of the change
-    socket.broadcast.emit("pos", data);
-    // socket.emit("pos", data);
+  socket.on("get scene", () => {
+    io.emit("scene change", SCENE);
+  });
+
+  /**
+   * tells all clients to change the current scene
+   * @param e the name of the server we wish to start
+   */
+  socket.on("scene change", (e) => {
+    SCENE = e;
+    console.log(`SCENE CHANGED TO: ${SCENE}`);
+    io.emit("scene change", SCENE);
   });
 });
 

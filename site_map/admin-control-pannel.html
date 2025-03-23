@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Panel</title>
+    <style>
+      #scenes {
+        font-family: "Courier New", Courier, monospace;
+      }
+    </style>
+    <script src="../socket.io/socket.io.js"></script>
+    <script>
+      const SOCKET = io();
+
+      window.onload = () => {
+        scenes = document.querySelectorAll("input");
+        // set to emit the state of the app rn
+        scenes.forEach((scene) => {
+          scene.addEventListener("input", (e) => {
+            SOCKET.emit("scene change", e.target.value);
+          });
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="scenes">
+      <div>
+        <input
+          type="radio"
+          name="Scene"
+          value="PS2ControllerLinesScene"
+          id="PS2ControllerLinesScene"
+        />
+        <label for="PS2ControllerLinesScene">PS2ControllerLinesScene</label>
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="Scene"
+          value="LinesOnlyScene"
+          id="LinesOnlyScene"
+        />
+        <label for="LinesOnlyScene">LinesOnlyScene</label>
+      </div>
+      <div>
+        <input type="radio" name="Scene" value="I2CDemo" id="I2CDemo" />
+        <label for="I2CDemo">I2CDemo</label>
+      </div>
+      <div>
+        <input type="radio" name="Scene" value="SPIDemo" id="SPIDemo" />
+        <label for="SPIDemo">SPIDemo</label>
+      </div>
+      <div>
+        <input type="radio" name="Scene" value="USARTDemo" id="USARTDemo" />
+        <label for="USARTDemo">USARTDemo</label>
+      </div>
+    </div>
+  </body>
+</html>
