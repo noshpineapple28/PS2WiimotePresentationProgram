@@ -41,6 +41,9 @@ class PS2 {
     this.width = width;
     this.height = height;
 
+    // state
+    this.paused = false;
+
     // slider pos
     this.knob_x = this.posX;
     this.knob_x = map(
@@ -238,6 +241,17 @@ class PS2 {
    */
   pressed() {
     // return early if not in analog mode
+    // the pause button
+    if (this.is_inside_pause_button()) {
+      this.paused = !this.paused;
+      for (let wire of scene.renderables) {
+        wire.paused = !wire.paused;
+        if (this.paused)
+          wire.start_frame_remainder = frameCount % (60 / scene.hz);
+      }
+    }
+
+    // control sticks
     if (scene.miso.data_buffer[1] != 0x72) return;
 
     let perc_l_x = round(
@@ -324,6 +338,47 @@ class PS2 {
     this.right_stick.display();
   }
 
+  is_inside_pause_button() {
+    return (
+      mouseX >= this.posX - this.width * 0.1 &&
+      mouseX <= this.posX + this.width * 0.1 &&
+      mouseY >= this.height * 0.75 - this.width * 0.05 &&
+      mouseY <= this.height * 0.75 + this.width * 0.05
+    );
+  }
+
+  pause_button() {
+    push();
+    rectMode(CENTER);
+    noStroke();
+    let phrase = "PAUSE";
+
+    // set fills
+    let fill_color = 60;
+    if (this.paused) {
+      phrase = "UNPAUSE";
+      fill_color = 45;
+    }
+    if (this.is_inside_pause_button()) {
+      if (mouseIsPressed) fill_color -= 20;
+      else fill_color += 11;
+    }
+
+    // draw it
+    fill(fill_color);
+    rect(
+      this.posX,
+      this.posY + this.height * 0.25,
+      this.width * 0.2,
+      this.width * 0.1,
+      10
+    );
+    // textAlign(CENTER);
+    fill(0);
+    text(phrase, this.posX, this.posY + this.height * 0.25);
+    pop();
+  }
+
   /**
    * displays the PS2 controller
    */
@@ -333,5 +388,6 @@ class PS2 {
     noStroke();
     fill(0);
     this.controller();
+    this.pause_button();
   }
 }

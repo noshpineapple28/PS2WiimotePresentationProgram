@@ -150,6 +150,10 @@ class PS2ControllerLinesScene extends Scene {
   display() {
     super.display();
     this.controller.display();
+
+    stroke(42);
+    if (width > height && mouseX <= width / 2) line(mouseX, 0, mouseX, height);
+    else if (width < height) line(mouseX, 0, mouseX, height / 2);
   }
 
   /**

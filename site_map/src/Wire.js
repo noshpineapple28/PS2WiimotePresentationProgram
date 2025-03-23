@@ -22,6 +22,8 @@ class Wire {
 
     // states
     this.edge = "RISING";
+    this.paused = false;
+    this.frame_paused_on = 0;
 
     // positions
     this.points = [[this.posX, this.posY]];
@@ -31,6 +33,8 @@ class Wire {
    * updates the position of logic lines
    */
   update() {
+    if (this.paused) return;
+
     // update points
     for (let i = 0; i < this.points.length; i++) {
       if (this.points[i][0] < this.width + this.posX) this.points[i][0] += 1;
