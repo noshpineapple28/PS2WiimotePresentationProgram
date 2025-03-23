@@ -1,5 +1,5 @@
 "use strict";
-// const SOCKET = io();
+const SOCKET = io();
 const MEDIA = {};
 let controller;
 
@@ -17,6 +17,7 @@ function preload() {
   MEDIA["select"] = loadImage("../media/select.png");
   MEDIA["1trigger"] = loadImage("../media/1trigger.png");
   MEDIA["2trigger"] = loadImage("../media/2trigger.png");
+  MEDIA["stick_button"] = loadImage("../media/stick_button.png");
 }
 
 function setup() {
@@ -25,7 +26,7 @@ function setup() {
   // set frame rate
   frameRate(60);
 
-  scene = new LinesOnlyScene();
+  scene = new PS2ControllerLinesScene();
 }
 
 function draw() {

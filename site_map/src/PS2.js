@@ -232,6 +232,29 @@ class PS2 {
         0,
         true
       ),
+      // analog sticks buttons
+      new Button(
+        this.posX - this.width * 0.12198795180722892,
+        this.posY + this.width * 0.2,
+        this.width * 0.075,
+        this.width * 0.075,
+        MEDIA["stick_button"],
+        BM1_L3_MASK,
+        3,
+        0,
+        false
+      ),
+      new Button(
+        this.posX + this.width * 0.11,
+        this.posY + this.width * 0.2,
+        this.width * 0.075,
+        this.width * 0.075,
+        MEDIA["stick_button"],
+        BM1_L3_MASK,
+        3,
+        0,
+        false
+      ),
     ];
   }
 
