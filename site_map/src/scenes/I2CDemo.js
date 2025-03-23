@@ -50,7 +50,7 @@ class I2CDemo extends Scene {
     /************************** USED **************************/
     this.clock = new Clock(
       0,
-      height * .28,
+      height * 0.28,
       width,
       height * 0.2,
       "blue",
@@ -60,7 +60,7 @@ class I2CDemo extends Scene {
 
     this.miso = new MISO(
       0,
-      height * .52,
+      height * 0.52,
       width,
       height * 0.2,
       "brown",

@@ -3,7 +3,7 @@
  *    in real time
  */
 
-class SPIDemo extends Scene {
+class USARTDemo extends Scene {
   /**
    * creates wires and ps2 controller, as well as sets the hz
    */
@@ -37,25 +37,18 @@ class SPIDemo extends Scene {
       color(0, 255, 0)
     );
     this.renderables.push(this.acknowledge);
-
-    /************************** USED **************************/
     // set alert pin
-    this.alert = new Alert(0, height * 0.7, width, height * 0.2, "yellow");
+    this.alert = new Alert(0, -1000, width, height * 0.2, "yellow");
     this.renderables.push(this.alert);
 
-    this.clock = new Clock(
-      0,
-      height * 0.07,
-      width,
-      height * 0.2,
-      "blue",
-      this.alert
-    );
+    this.clock = new Clock(0, -1000, width, height * 0.2, "blue", this.alert);
     this.renderables.push(this.clock);
+
+    /************************** USED **************************/
 
     this.miso = new MISO(
       0,
-      height * 0.49,
+      height * 0.28,
       width,
       height * 0.2,
       "brown",
@@ -64,11 +57,11 @@ class SPIDemo extends Scene {
       this.acknowledge
     );
     this.renderables.push(this.miso);
-    this.miso.data_buffer = [0x01, 0x02, 0x03];
+    this.miso.data_buffer = [(0 << 0) + (1 << 1), 0x02, 0x03];
 
     this.mosi = new MOSI(
       0,
-      height * 0.28,
+      height * 0.49,
       width,
       height * 0.2,
       "orange",
@@ -76,7 +69,7 @@ class SPIDemo extends Scene {
       this.alert
     );
     this.renderables.push(this.mosi);
-    this.mosi.data_buffer = [0x03, 0x02, 0x01];
+    this.mosi.data_buffer = [(0 << 0) + (1 << 1), 0x02, 0x01];
   }
 
   /**
