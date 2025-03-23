@@ -42,7 +42,6 @@ class PS2ControllerLinesScene extends Scene {
    */
   create_wires() {
     // set alert pin
-    console.log(this.wire_y_start + this.wire_y_spacing * 3);
     this.alert = new Alert(
       0,
       this.wire_y_start + this.wire_y_spacing * 3,
