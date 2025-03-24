@@ -8,25 +8,20 @@ class AnalogButton extends Button {
 
     // update MISO line buffer to include or exclude analog sticks
     if (this.pressed) {
-      let perc_l_x = round(
-        (abs(scene.controller.left_stick.deltaX - scene.controller.left_stick.posX) /
-          scene.controller.left_stick.width) *
-          0xff
+      let stick = scene.controller.left_stick;
+      let perc_l_x = floor(
+        ((stick.deltaX - (stick.posX - stick.width / 2)) / stick.width) * 0xff
       );
-      let perc_l_y = round(
-        (abs(scene.controller.left_stick.deltaY - scene.controller.left_stick.posY) /
-          scene.controller.left_stick.width) *
-          0xff
+      let perc_l_y = floor(
+        ((stick.deltaY - (stick.posY - stick.width / 2)) / stick.width) * 0xff
       );
-      let perc_r_x = round(
-        (abs(scene.controller.right_stick.deltaX - scene.controller.right_stick.posX) /
-          scene.controller.right_stick.width) *
-          0xff
+
+      stick = scene.controller.right_stick;
+      let perc_r_x = floor(
+        ((stick.deltaX - (stick.posX - stick.width / 2)) / stick.width) * 0xff
       );
-      let perc_r_y = round(
-        (abs(scene.controller.right_stick.deltaY - scene.controller.right_stick.posY) /
-          scene.controller.right_stick.width) *
-          0xff
+      let perc_r_y = floor(
+        ((stick.deltaY - (stick.posY - stick.width / 2)) / stick.width) * 0xff
       );
 
       scene.miso.data_buffer[1] = 0x72;

@@ -21,6 +21,21 @@
             SOCKET.emit("scene change", e.target.value);
           });
         });
+
+        // button update
+        const BUTTON = document.querySelector("button");
+        BUTTON.onclick = () => {
+          SOCKET.emit("toggle updates");
+        };
+
+        setInterval(() => {
+          SOCKET.emit("get server state");
+        }, 100);
+
+        SOCKET.on("server state", (state) => {
+          if (state) BUTTON.innerHTML = "Stop Updates";
+          else BUTTON.innerHTML = "Begin Updates";
+        });
       };
     </script>
   </head>
@@ -57,5 +72,6 @@
         <label for="PS2ControllerLinesScene">PS2ControllerLinesScene</label>
       </div>
     </div>
+    <button>Start Updates</button>
   </body>
 </html>

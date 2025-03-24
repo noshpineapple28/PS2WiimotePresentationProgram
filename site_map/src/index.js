@@ -54,6 +54,30 @@ function setup() {
       }
     }
   });
+
+  /**
+   * gets a controller to send status to server
+   */
+  SOCKET.on("get controller", () => {
+    // if it doesn't exist, don't send
+    if (!scene || !scene.controller) {
+      SOCKET.emit("update controller", undefined);
+      return;
+    }
+
+    SOCKET.emit("update controller", scene.controller.get_controller());
+  });
+
+  /**
+   * updates the state of a controller
+   * @param cntrl the controller to update with
+   */
+  SOCKET.on("update controller", (cntrl) => {
+    // if it doesn't exist, don't update
+    if (!scene || !scene.controller) return;
+
+    scene.controller.set_controller(cntrl);
+  });
   SOCKET.emit("get scene");
 
   // set frame rate
@@ -76,6 +100,14 @@ function mouseClicked() {
   if (!scene) return;
 
   scene.mouseClicked();
+
+  // if it doesn't exist, don't send
+  if (!scene || !scene.controller) {
+    SOCKET.emit("update controller", undefined);
+    return;
+  }
+
+  SOCKET.emit("update controller", scene.controller.get_controller());
 }
 
 function touchStarted() {
@@ -83,4 +115,12 @@ function touchStarted() {
   if (!scene) return;
 
   scene.touchStarted();
+
+  // if it doesn't exist, don't send
+  if (!scene || !scene.controller) {
+    SOCKET.emit("update controller", undefined);
+    return;
+  }
+
+  SOCKET.emit("update controller", scene.controller.get_controller());
 }

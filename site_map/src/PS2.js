@@ -81,41 +81,49 @@ class PS2 {
    */
   create_buttons() {
     this.buttons = [
+      /*********************** BM1 ***********************/
+      // select
       new Button(
-        this.posX + this.width * 0.23343373493975902,
-        this.posY + this.width * 0.021837349397590362,
-        this.width * 0.05,
-        this.width * 0.05,
-        MEDIA["x"],
-        BM2_X_MASK,
-        4
-      ),
-      new Button(
-        this.posX + this.width * 0.30271084337349397,
+        this.posX - this.width * 0.07530120481927711,
         this.posY - this.width * 0.038403614457831324,
-        this.width * 0.05,
-        this.width * 0.05,
-        MEDIA["circle"],
-        BM2_O_MASK,
-        4
+        this.width * 0.04,
+        this.width * 0.025,
+        MEDIA["select"],
+        BM1_SELECT_MASK,
+        3
+      ),
+      // analog sticks buttons
+      new Button(
+        this.posX - this.width * 0.12198795180722892,
+        this.posY + this.width * 0.2,
+        this.width * 0.075,
+        this.width * 0.075,
+        MEDIA["stick_button"],
+        BM1_L3_MASK,
+        3,
+        0,
+        false
       ),
       new Button(
-        this.posX + this.width * 0.16735966735966737,
-        this.posY - this.width * 0.04261954261954262,
-        this.width * 0.05,
-        this.width * 0.05,
-        MEDIA["square"],
-        BM2_SQUARE_MASK,
-        4
+        this.posX + this.width * 0.11,
+        this.posY + this.width * 0.2,
+        this.width * 0.075,
+        this.width * 0.075,
+        MEDIA["stick_button"],
+        BM1_R3_MASK,
+        3,
+        0,
+        false
       ),
+      // start
       new Button(
-        this.posX + this.width * 0.2338877338877339,
-        this.posY - this.width * 0.09875259875259876,
-        this.width * 0.05,
-        this.width * 0.05,
-        MEDIA["triangle"],
-        BM2_TRIANGLE_MASK,
-        4
+        this.posX + this.width * 0.07,
+        this.posY - this.width * 0.038403614457831324,
+        this.width * 0.04,
+        this.width * 0.025,
+        MEDIA["start"],
+        BM1_START_MASK,
+        3
       ),
       // up
       new Button(
@@ -160,33 +168,29 @@ class PS2 {
         3,
         -90
       ),
-      // select
+
+      /*********************** BM2 ***********************/
+      // L2
       new Button(
-        this.posX - this.width * 0.07530120481927711,
-        this.posY - this.width * 0.038403614457831324,
-        this.width * 0.04,
-        this.width * 0.025,
-        MEDIA["select"],
-        BM1_SELECT_MASK,
-        3
+        this.posX - this.width * 0.23795180722891565,
+        this.posY - this.width * 0.32756024096385544,
+        this.width * 0.1,
+        this.width * 0.06,
+        MEDIA["2trigger"],
+        BM2_L2_MASK,
+        4
       ),
-      // analog
-      new AnalogButton(
-        this.posX,
-        this.posY + this.width * 0.029367469879518073,
-        this.width * 0.05,
-        this.width * 0.025,
-        MEDIA["select"]
-      ),
-      // start
+      // R2
       new Button(
-        this.posX + this.width * 0.07,
-        this.posY - this.width * 0.038403614457831324,
-        this.width * 0.04,
-        this.width * 0.025,
-        MEDIA["start"],
-        BM1_START_MASK,
-        3
+        this.posX + this.width * 0.23795180722891565,
+        this.posY - this.width * 0.32756024096385544,
+        this.width * 0.1,
+        this.width * 0.06,
+        MEDIA["2trigger"],
+        BM2_R2_MASK,
+        4,
+        0,
+        true
       ),
       // L1
       new Button(
@@ -210,50 +214,51 @@ class PS2 {
         0,
         true
       ),
-      // L2
       new Button(
-        this.posX - this.width * 0.23795180722891565,
-        this.posY - this.width * 0.32756024096385544,
-        this.width * 0.1,
-        this.width * 0.06,
-        MEDIA["2trigger"],
-        BM2_L2_MASK,
+        this.posX + this.width * 0.2338877338877339,
+        this.posY - this.width * 0.09875259875259876,
+        this.width * 0.05,
+        this.width * 0.05,
+        MEDIA["triangle"],
+        BM2_TRIANGLE_MASK,
         4
       ),
-      // R2
       new Button(
-        this.posX + this.width * 0.23795180722891565,
-        this.posY - this.width * 0.32756024096385544,
-        this.width * 0.1,
-        this.width * 0.06,
-        MEDIA["2trigger"],
-        BM2_R2_MASK,
-        4,
-        0,
-        true
-      ),
-      // analog sticks buttons
-      new Button(
-        this.posX - this.width * 0.12198795180722892,
-        this.posY + this.width * 0.2,
-        this.width * 0.075,
-        this.width * 0.075,
-        MEDIA["stick_button"],
-        BM1_L3_MASK,
-        3,
-        0,
-        false
+        this.posX + this.width * 0.30271084337349397,
+        this.posY - this.width * 0.038403614457831324,
+        this.width * 0.05,
+        this.width * 0.05,
+        MEDIA["circle"],
+        BM2_O_MASK,
+        4
       ),
       new Button(
-        this.posX + this.width * 0.11,
-        this.posY + this.width * 0.2,
-        this.width * 0.075,
-        this.width * 0.075,
-        MEDIA["stick_button"],
-        BM1_L3_MASK,
-        3,
-        0,
-        false
+        this.posX + this.width * 0.23343373493975902,
+        this.posY + this.width * 0.021837349397590362,
+        this.width * 0.05,
+        this.width * 0.05,
+        MEDIA["x"],
+        BM2_X_MASK,
+        4
+      ),
+      new Button(
+        this.posX + this.width * 0.16735966735966737,
+        this.posY - this.width * 0.04261954261954262,
+        this.width * 0.05,
+        this.width * 0.05,
+        MEDIA["square"],
+        BM2_SQUARE_MASK,
+        4
+      ),
+
+      /*********************** ANALOG ***********************/
+      // analog
+      new AnalogButton(
+        this.posX,
+        this.posY + this.width * 0.029367469879518073,
+        this.width * 0.05,
+        this.width * 0.025,
+        MEDIA["select"]
       ),
     ];
   }
@@ -400,6 +405,105 @@ class PS2 {
     fill(0);
     text(phrase, this.posX, this.posY + this.height * 0.35);
     pop();
+  }
+
+  /**
+   * returns a PS2 equivalent of a controllers status
+   * @returns Object with equivalent struct fields to PS2 data format
+   */
+  get_controller() {
+    let controller = {
+      BM1: 0xff,
+      BM2: 0xff,
+      RX: 0x7f,
+      RY: 0x7f,
+      LX: 0x7f,
+      LY: 0x7f,
+    };
+
+    // BM1
+    for (let i = 0; i < 8; i++) {
+      if (this.buttons[i].pressed)
+        controller.BM1 &= ~this.buttons[i].button_mask;
+      else controller.BM1 |= this.buttons[i].button_mask;
+    }
+
+    // BM2
+    for (let i = 8; i < 16; i++) {
+      if (this.buttons[i].pressed)
+        controller.BM2 &= ~this.buttons[i].button_mask;
+      else controller.BM2 |= this.buttons[i].button_mask;
+    }
+
+    let stick = scene.controller.left_stick;
+    controller.LX = floor(
+      ((stick.deltaX - (stick.posX - stick.width / 2)) / stick.width) * 0xff
+    );
+    controller.LY = floor(
+      ((stick.deltaY - (stick.posY - stick.width / 2)) / stick.width) * 0xff
+    );
+
+    stick = scene.controller.right_stick;
+    controller.RX = floor(
+      ((stick.deltaX - (stick.posX - stick.width / 2)) / stick.width) * 0xff
+    );
+    controller.RY = floor(
+      ((stick.deltaY - (stick.posY - stick.width / 2)) / stick.width) * 0xff
+    );
+
+    return controller;
+  }
+
+  /**
+   * sets the ps2 layout to whatever the given data ha
+   * @param cntrl the object reference of a PS2 controller used to set the layout
+   */
+  set_controller(cntrl) {
+    // BM1
+    for (let i = 0; i < 8; i++) {
+      if (cntrl["BM1"] & (1 << i)) {
+        this.buttons[i].pressed = false;
+        scene.miso.data_buffer[this.buttons[i].MISO_index] |=
+          this.buttons[i].button_mask;
+      } else {
+        this.buttons[i].pressed = true;
+        scene.miso.data_buffer[this.buttons[i].MISO_index] &=
+          ~this.buttons[i].button_mask;
+      }
+    }
+
+    // BM2
+    for (let i = 0; i < 8; i++) {
+      if (cntrl["BM2"] & (1 << i)) {
+        this.buttons[8 + i].pressed = false;
+        scene.miso.data_buffer[this.buttons[8 + i].MISO_index] |=
+          this.buttons[8 + i].button_mask;
+      } else {
+        this.buttons[8 + i].pressed = true;
+        scene.miso.data_buffer[this.buttons[8 + i].MISO_index] &=
+          ~this.buttons[8 + i].button_mask;
+      }
+    }
+
+    // L stick
+    this.left_stick.deltaX =
+      this.left_stick.posX -
+      this.left_stick.width / 2 +
+      (cntrl["LX"] / 0xff) * this.left_stick.width;
+    this.left_stick.deltaY =
+      this.left_stick.posY -
+      this.left_stick.width / 2 +
+      (cntrl["LY"] / 0xff) * this.left_stick.width;
+
+    // R stick
+    this.right_stick.deltaX =
+      this.right_stick.posX -
+      this.right_stick.width / 2 +
+      (cntrl["RX"] / 0xff) * this.right_stick.width;
+    this.right_stick.deltaY =
+      this.right_stick.posY -
+      this.right_stick.width / 2 +
+      (cntrl["RY"] / 0xff) * this.right_stick.width;
   }
 
   /**
