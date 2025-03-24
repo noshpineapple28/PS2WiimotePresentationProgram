@@ -33,22 +33,27 @@ function setup() {
   SOCKET.on("scene change", (e) => {
     switch (e) {
       case "PS2ControllerLinesScene": {
+        if (scene instanceof PS2ControllerLinesScene) break;
         scene = new PS2ControllerLinesScene();
         break;
       }
       case "LinesOnlyScene": {
+        if (scene instanceof LinesOnlyScene) break;
         scene = new LinesOnlyScene();
         break;
       }
       case "I2CDemo": {
+        if (scene instanceof I2CDemo) break;
         scene = new I2CDemo();
         break;
       }
       case "SPIDemo": {
+        if (scene instanceof SPIDemo) break;
         scene = new SPIDemo();
         break;
       }
       case "USARTDemo": {
+        if (scene instanceof USARTDemo) break;
         scene = new USARTDemo();
         break;
       }
