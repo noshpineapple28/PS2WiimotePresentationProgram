@@ -163,7 +163,7 @@ class PS2ControllerLinesScene extends Scene {
     this.miso.byte = 0;
     this.mosi.initiate_transfer();
     this.mosi.byte = 0;
-    if (mouseIsPressed) this.handleButtonPresses();
+    this.handleButtonPresses();
   }
 
   /**

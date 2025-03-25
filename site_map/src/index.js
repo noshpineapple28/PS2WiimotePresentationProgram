@@ -100,7 +100,22 @@ function draw() {
 }
 
 // temp for sending clock start
-function mouseClicked() {
+function mousePressed() {
+  // only handle if the scene has been set
+  if (!scene) return;
+
+  scene.mouseClicked();
+
+  // if it doesn't exist, don't send
+  if (!scene || !scene.controller) {
+    SOCKET.emit("update controller", undefined);
+    return;
+  }
+
+  SOCKET.emit("update controller", scene.controller.get_controller());
+}
+
+function mouseReleased() {
   // only handle if the scene has been set
   if (!scene) return;
 
@@ -118,9 +133,6 @@ function mouseClicked() {
 function mouseDragged() {
   // only handle if the scene has been set
   if (!scene) return;
-  console.log(1);
-
-  scene.mouseClicked();
 
   // to save our bandwidth only send it on frames divisible by 20
   if (frameCount % 3 == 0) return;
@@ -132,8 +144,10 @@ function mouseDragged() {
   if (
     scene.controller.left_stick.is_inside() ||
     scene.controller.right_stick.is_inside()
-  )
+  ) {
+    scene.mouseClicked();
     SOCKET.emit("update controller", scene.controller.get_controller());
+  }
 }
 
 function touchStarted() {
