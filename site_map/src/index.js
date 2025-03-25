@@ -115,6 +115,27 @@ function mouseClicked() {
   SOCKET.emit("update controller", scene.controller.get_controller());
 }
 
+function mouseDragged() {
+  // only handle if the scene has been set
+  if (!scene) return;
+  console.log(1);
+
+  scene.mouseClicked();
+
+  // to save our bandwidth only send it on frames divisible by 20
+  if (frameCount % 3 == 0) return;
+  // if it doesn't exist, don't send
+  if (!scene || !scene.controller) {
+    SOCKET.emit("update controller", undefined);
+    return;
+  }
+  if (
+    scene.controller.left_stick.is_inside() ||
+    scene.controller.right_stick.is_inside()
+  )
+    SOCKET.emit("update controller", scene.controller.get_controller());
+}
+
 function touchStarted() {
   // only handle if the scene has been set
   if (!scene) return;
